@@ -1,0 +1,35 @@
+<html>
+<body>
+    HELLFOOALJKJLJDF
+    <div id="ttt"></div>
+    
+    <script src="jquery.min.js"></script>
+    <script src="flocking-no-jquery.min.js"></script>
+    <script>
+        $('#ttt').html("jfjfkjlkjf");//test
+        
+        var synth = flock.synth({
+            synthDef: {
+                ugen: "flock.ugen.sinOsc",
+                freq: 440,
+                mul: 0.25
+            }
+        });
+                                
+        synth.play();
+        
+        $("#ttt").click(function(){
+            synth.play();
+            flock.enviro.shared.play();
+        });
+        
+    </script>
+    
+    <audio id="some_sound" controls>
+        <source src="Loop.aif" type="audio/aif">
+    </audio>
+    <script>
+        document.getElementById('some_sound').play();
+    </script>
+</body>
+</html>
