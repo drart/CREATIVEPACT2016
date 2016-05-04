@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <style>
+            *{border:0;margin:0;}
+            #wave{position:fixed;top:0;left:0;width:100%;height:100%;background-color:blue;}
+        </style>
+    </head>
+    <body>
+        <canvas id="wave"></canvas>
+        
+        <script src="flocking-all.min.js"></script>
+        <script>
+            var synth = flock.synth({
+                synthDef: {
+                    ugen: "flock.ugen.scope",
+                    source:{
+                        id: "singer",
+                        ugen:"flock.ugen.sinOsc",
+                        freq: 440,
+                        mul: 0.25
+                    },
+                    options:{
+                        canvas: "#wave",
+                        styles: {
+                            strokeColor: "#777777",
+                            strokeWidth: 2
+                        }
+                    }
+                }
+            });
+            synth.play();
+            </script>
+    </body>
+</html>
