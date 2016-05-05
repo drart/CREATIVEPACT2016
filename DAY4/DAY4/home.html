@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <style>
+            *{border:0;margin:0;}
+            #wave{position:fixed;top:0;left:0;width:100%;height:100%;background-color:blue;}
+            </style>
+    </head>
+    <body>        
+        <script src="flocking-all.min.js"></script>
+        <script>
+            // Sine tone shaped by a simple attack/sustain/release envelope and periodically triggered.
+            var synth = flock.synth({
+                synthDef: [
+                    {
+                        id: "righthat",
+                        ugen: "flock.ugen.whiteNoise",
+                        mul: {
+                            ugen: "flock.ugen.env.simpleASR",
+                            start: 0.0,
+                            attack: 0.01,
+                            sustain: 0.2,
+                            release: 0.1,
+                            gate: {
+                                ugen: "flock.ugen.impulse",
+                                rate: "control",
+                                freq: 2,
+                                phase: 0.5
+                                }
+                             }
+                        },
+                        {
+                            id: "lefthat",
+                            ugen: "flock.ugen.whiteNoise",
+                            mul: {
+                                ugen: "flock.ugen.env.simpleASR",
+                                start: 0.0,
+                                attack: 0.01,
+                                sustain: 0.2,
+                                release: 0.1,
+                                gate: {
+                                    ugen: "flock.ugen.impulse",
+                                    rate: "control",
+                                    freq: 2,
+                                    phase: 0.0
+                                }
+                            }
+                        }
+                    ]
+                });
+                synth.play();
+            </script>
+    </body>
+</html>
