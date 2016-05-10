@@ -8,25 +8,34 @@
     <body>        
         <script src="flocking-all.min.js"></script>
         <script>
-            var synth = flock.synth({
-                synthDef:
+            var synths = []
+            for (var i = 0; i < 100; i++){
+                var s = flock.synth({
+                    synthDef:
                     {
                         id: "thing",
                         ugen: "flock.ugen.sinOsc",
-                        mul: {
-                            ugen: "flock.ugen.sinOsc",
-                            mul: 0.5,
-                            freq: 0.5
-                        },
+                        mul: 0.05,
                         freq: {
-                            ugen: "flock.ugen.sinOsc",
-                            mul: 300,
-                            add: 800,
-                            freq: 40
+                            ugen: "flock.ugen.line",
+                            start: 300,
+                            end: 800,
+                            duration: 30
                         }
                     }
                 });
-                synth.play();
-            </script>
+                
+                //synth.play();
+                synths.push(s)
+                s.play();
+            }
+        
+            function scatter(){
+                for(var i = 0; i < synths.length; i++){
+                    synths[i].set("thing.freq.end",Math.random()*1000 + 80)
+                }
+            }
+            scatter();
+        </script>
     </body>
 </html>
